@@ -27,29 +27,6 @@ body {
 
 
 
-#blurBackground {
-display: none; /* Se oculta inicialmente */
-
-position: fixed; /* Asegúrate de usar 'fixed' para mantenerlo en su lugar */
-
-width: 90%; /* Lo expandimos a todo el ancho */
-height: 60%; /* Lo expandimos a toda la altura */
-text-align: center;
-justify-content: center;
-background: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
-backdrop-filter: blur(10px); /* Aplica el blur al fondo */
-z-index: 100;
-/* border: 5px solid #fff; Borde blanco */
-border-radius: 10px; /* Bordes redondeados */
-
-/* Animación de aparición suave */
-opacity: 0;
-animation: fadeIn 1s forwards; /* Aparece suavemente */
-}
-
-
-
-
 
 
 
