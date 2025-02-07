@@ -1,75 +1,69 @@
 document.addEventListener("DOMContentLoaded", function () {
     const noButton = document.getElementById("no-button");
     const yesButton = document.getElementById("yes-button");
-    const animationContainer = document.getElementById("animation-container");
+    const blurBackground = document.getElementById("blurBackground");
     const heartAnimation = document.getElementById("heart-animation");
     const loveLetter = document.getElementById("love-letter");
-    
-    noButton.addEventListener("mouseover", function () {
-        const x = Math.random() * (window.innerWidth - noButton.clientWidth);
-        const y = Math.random() * (window.innerHeight - noButton.clientHeight);
-        noButton.style.position = "absolute";
+
+    // Evitar que el botón "NO" recargue la página
+    noButton.addEventListener("click", function (event) {
+        event.preventDefault();
+    });
+
+    noButton.addEventListener("pointerover", function () {
+        const maxX = window.innerWidth - noButton.clientWidth - 20;
+        const maxY = window.innerHeight - noButton.clientHeight - 20;
+
+        const x = Math.random() * maxX;
+        const y = Math.random() * maxY;
+
+        noButton.style.position = "fixed";
         noButton.style.left = `${x}px`;
         noButton.style.top = `${y}px`;
     });
-    
 
     yesButton.addEventListener("click", function () {
-        const blurBackground = document.getElementById("blurBackground");
-    
-        // Bloquear el desplazamiento en toda la página
-        document.documentElement.style.overflow = "hidden"; // Evita el scroll en HTML
-        document.body.style.overflow = "hidden"; // Evita el scroll en BODY
-    
-        // Mostrar el fondo con blur y animación de aparición
-        blurBackground.style.display = "block"; // Activamos el fondo con blur
-        blurBackground.style.animation = "fadeIn 1s forwards"; // Aparece suavemente
-        
-        // Primera animación (Corazón)
+        // Bloquear desplazamiento
+        document.documentElement.style.overflow = "hidden";
+        document.body.style.overflow = "hidden";
+
+        // Mostrar animaciones
+        blurBackground.style.display = "block";
+        blurBackground.style.animation = "fadeIn 1s forwards";
         heartAnimation.classList.add("show");
-    
+
         setTimeout(() => {
-            heartAnimation.classList.remove("show"); // Oculta el corazón después de 10s
-    
-            // Segunda animación (Carta de amor y desplazamiento)
+            heartAnimation.classList.remove("show");
             loveLetter.classList.add("show-letter");
             window.scrollTo({ top: loveLetter.offsetTop, behavior: 'smooth' });
         }, 10000);
-    
-        // Tercera animación (Crear corazones)
+
+        // Crear corazones
         for (let i = 0; i < 20; i++) {
             createHeart();
         }
-    
-        // Desaparecer el fondo con fadeOut después de 12 segundos
+
+        // Desaparecer fondo después de 12s
         setTimeout(() => {
-            blurBackground.style.animation = "fadeOut 2s forwards"; // Animación de desaparición
-    
+            blurBackground.style.animation = "fadeOut 2s forwards";
             setTimeout(() => {
-                blurBackground.style.display = "none"; // Ocultar el fondo después de la animación
-                
-                // Restaurar el desplazamiento
-                document.documentElement.style.overflow = "auto"; // Restaurar el scroll en HTML
-                document.body.style.overflow = "auto"; // Restaurar el scroll en BODY
-            }, 2000); // Esperar 2 segundos para ocultar el fondo
-        }, 9000); // 12 segundos para permitir que el fondo esté visible por un tiempo adecuado
+                blurBackground.style.display = "none";
+                document.documentElement.style.overflow = "auto";
+                document.body.style.overflow = "auto";
+            }, 2000);
+        }, 9000);
     });
-    
-    
-    
-    
-    
 
     function createHeart() {
         const heart = document.createElement("div");
         heart.innerHTML = "❤️";
         heart.classList.add("heart");
         document.body.appendChild(heart);
-        
+
         const randomX = Math.random() * window.innerWidth;
         heart.style.left = `${randomX}px`;
         heart.style.animationDuration = `${Math.random() * 2 + 1}s`;
-        
+
         setTimeout(() => {
             heart.remove();
         }, 10000);
