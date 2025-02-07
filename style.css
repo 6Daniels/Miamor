@@ -276,7 +276,7 @@ display: block !important;
   color: #000000;
   margin-bottom: 20px;
   opacity: 0;
-  animation: fadeInOut 11s ease-in-out forwards; /* Animación de aparición y desaparición */
+  animation: fadeInOut 10s ease-in-out forwards; /* Animación de aparición y desaparición */
   text-shadow: 2px 2px 5px rgba(255, 0, 100, 0.4);
 }
 
